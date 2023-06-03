@@ -1,3 +1,5 @@
+#include <dummy.h>
+
 /*!
    \file esp_duck/cli.cpp
    \brief Command line interface source
@@ -10,16 +12,15 @@
 // SimpleCLI library
 #include <SimpleCLI.h>
 
-// Get RAM (heap) usage
-extern "C" {
-#include "user_interface.h"
-}
+// // Get RAM (heap) usage
+// extern "C" {
+// #include "user_interface.h"
+// }
 
 // Import modules used for different commands
 #include "spiffs.h"
 #include "duckscript.h"
 #include "settings.h"
-#include "com.h"
 #include "config.h"
 
 namespace cli {
@@ -79,7 +80,7 @@ namespace cli {
          * Prints number of free bytes in the RAM
          */
         cli.addCommand("ram", [](cmd* c) {
-            size_t freeRam = system_get_free_heap_size();
+            size_t freeRam = ESP.getFreeHeap();
             String res     = String(freeRam) + " bytes available";
             print(res);
         });
@@ -90,7 +91,7 @@ namespace cli {
          * Prints the current version number
          */
         cli.addCommand("version", [](cmd* c) {
-            String res = "Version " + String(VERSION) + " (" + String(com::getVersion()) + ")";
+            String res = "Version " + String(VERSION);
             print(res);
         });
 
@@ -151,12 +152,12 @@ namespace cli {
          * i2c connection problem
          */
         cli.addCommand("status", [](cmd* c) {
-            if (com::connected()) {
+            if (true) {
                 if (duckscript::isRunning()) {
                     String s = "running " + duckscript::currentScript();
                     print(s);
                 } else {
-                    print("connected");
+                    print("local usb");
                 }
             } else {
                 print("Internal connection problem");

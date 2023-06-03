@@ -7,6 +7,7 @@
 
 #include <Arduino.h> // String
 #include <FS.h>      // File
+#include <LittleFS.h>
 
 namespace spiffs {
     void begin();

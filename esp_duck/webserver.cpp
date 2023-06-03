@@ -5,11 +5,11 @@
 
 #include "webserver.h"
 
-#include <ESP8266WiFi.h>
-#include <ESP8266mDNS.h>
+#include <WiFi.h>
+#include <ESPmDNS.h>
 #include <DNSServer.h>
 #include <ArduinoOTA.h>
-#include <ESPAsyncTCP.h>
+#include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 
 #include "config.h"
@@ -135,7 +135,7 @@ namespace webserver {
         ArduinoOTA.begin();
 
         events.onConnect([](AsyncEventSourceClient* client) {
-            client->send("hello!", NULL, millis(), 1000);
+            client->send("hello!", NULL, esp_timer_get_time(), 1000);
         });
         server.addHandler(&events);
 
@@ -151,7 +151,7 @@ namespace webserver {
         }, [](AsyncWebServerRequest* request, String filename, size_t index, uint8_t* data, size_t len, bool final) {
             if (!index) {
                 debugf("Update Start: %s\n", filename.c_str());
-                Update.runAsync(true);
+                //Update.runAsync(true);
                 if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
                     Update.printError(Serial);
                 }

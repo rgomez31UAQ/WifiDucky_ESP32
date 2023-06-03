@@ -5,48 +5,33 @@
 
 #include "config.h"
 #include "debug.h"
-
-#include "com.h"
 #include "duckscript.h"
+#include "duckparser.h"
 #include "webserver.h"
 #include "spiffs.h"
 #include "settings.h"
 #include "cli.h"
+#include "USB.h"
 
 void setup() {
     debug_init();
 
-    delay(200);
+    duckparser::beginKeyboard();
+    USB.begin();
 
-    com::begin();
+    delay(200);
 
     spiffs::begin();
     settings::begin();
     cli::begin();
     webserver::begin();
 
-    com::onDone(duckscript::nextLine);
-    com::onError(duckscript::stopAll);
-    com::onRepeat(duckscript::repeat);
-
-    if (spiffs::freeBytes() > 0) com::send(MSG_STARTED);
-
-    delay(10);
-    com::update();
-
-    debug("\n[~~~ WiFi Duck v");
-    debug(VERSION);
-    debugln(" Started! ~~~]");
-    debugln("    __");
-    debugln("___( o)>");
-    debugln("\\ <_. )");
-    debugln(" `---'   hjw\n");
-
     duckscript::run(settings::getAutorun());
 }
 
 void loop() {
-    com::update();
+
+
     webserver::update();
 
     debug_update();

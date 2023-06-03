@@ -8,6 +8,7 @@
 #include "config.h"
 #include "debug.h"
 
+
 namespace spiffs {
     File streamFile;
 
@@ -21,7 +22,7 @@ namespace spiffs {
     // ===== PUBLIC ====== //
     void begin() {
         debug("Initializing SPIFFS...");
-        SPIFFS.begin();
+        LittleFS.begin(true);
         debugln("OK");
 
         String FILE_NAME = "/startup_spiffs_test";
@@ -30,62 +31,61 @@ namespace spiffs {
         create(FILE_NAME);
         File f = open(FILE_NAME);
         if (!f) {
+            ESP_LOGI("", "test fs fail!");
             format();
         } else {
             f.close();
+            ESP_LOGI("", "test fs done!");
             remove(FILE_NAME);
         }
     }
 
     void format() {
         debug("Formatting SPIFFS...");
-        SPIFFS.format();
+        LittleFS.format();
         debugln("OK");
     }
 
     size_t size() {
-        FSInfo fs_info;
-
-        SPIFFS.info(fs_info);
-        return fs_info.totalBytes;
+        return LittleFS.totalBytes();
     }
 
     size_t usedBytes() {
-        FSInfo fs_info;
-
-        SPIFFS.info(fs_info);
-        return fs_info.usedBytes;
+        return LittleFS.usedBytes();
     }
 
     size_t freeBytes() {
-        FSInfo fs_info;
-
-        SPIFFS.info(fs_info);
-        return fs_info.totalBytes - fs_info.usedBytes;
+        return LittleFS.totalBytes() - LittleFS.usedBytes();
     }
 
     size_t size(String fileName) {
         fixPath(fileName);
 
-        File f = SPIFFS.open(fileName, "r");
+        File f = LittleFS.open(fileName, "r");
 
         return f.size();
     }
 
     bool exists(String fileName) {
-        return SPIFFS.exists(fileName);
+        return LittleFS.exists(fileName);
     }
 
     File open(String fileName) {
         fixPath(fileName);
 
-        return SPIFFS.open(fileName, "a+");
+        ESP_LOGI("", "File name %s", fileName);
+
+        File f = LittleFS.open(fileName, "a+");
+
+        f.seek(0);
+
+        return f;
     }
 
     void create(String fileName) {
         fixPath(fileName);
 
-        File f = SPIFFS.open(fileName, "a+");
+        File f = LittleFS.open(fileName, "a+");
 
         f.close();
     }
@@ -93,14 +93,14 @@ namespace spiffs {
     void remove(String fileName) {
         fixPath(fileName);
 
-        SPIFFS.remove(fileName);
+        LittleFS.remove(fileName);
     }
 
     void rename(String oldName, String newName) {
         fixPath(oldName);
         fixPath(newName);
 
-        SPIFFS.rename(oldName, newName);
+        LittleFS.rename(oldName, newName);
     }
 
     void write(String fileName, const char* str) {
@@ -128,17 +128,21 @@ namespace spiffs {
     }
 
     String listDir(String dirName) {
+
         String res;
 
         fixPath(dirName);
 
-        Dir dir = SPIFFS.openDir(dirName);
+        File root = open(dirName);
 
-        while (dir.next()) {
-            res += dir.fileName();
+        File file = root.openNextFile();
+
+        while (file) {
+            res += file.name();
             res += ' ';
-            res += size(dir.fileName());
+            res += size(file.name());
             res += '\n';
+            file = root.openNextFile();
         }
 
         if (res.length() == 0) {
@@ -152,6 +156,7 @@ namespace spiffs {
         streamClose();
         streamFile = open(fileName);
         if (!streamFile) debugln("ERROR: No stream file open");
+        else ESP_LOGI("", "File opened!");
     }
 
     void streamWrite(const char* buf, size_t len) {
@@ -172,9 +177,11 @@ namespace spiffs {
                 }
             }
 
+            ESP_LOGI("", "File buf %s", buf);
+
             return i;
         } else {
-            debugln("ERROR: No stream file open");
+            ESP_LOGI("", "ERROR: No stream file open");
             return 0;
         }
     }

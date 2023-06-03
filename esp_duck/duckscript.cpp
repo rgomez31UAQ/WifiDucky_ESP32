@@ -4,11 +4,12 @@
  */
 
 #include "duckscript.h"
+#include "duckparser.h"
+
 
 #include "config.h"
 #include "debug.h"
 
-#include "com.h"
 #include "spiffs.h"
 
 namespace duckscript {
@@ -83,8 +84,9 @@ namespace duckscript {
             memcpy(prevMessage, buf, buf_i);
             prevMessage[buf_i] = '\0';
         }
-
-        com::send(buf, buf_i);
+        ESP_LOGI("","%s", buf);
+        duckparser::parse(buf, buf_i);
+        //com::send(buf, buf_i);
 
         if (strncmp((char*)buf, "REPEAT", _min(buf_i, 6)) != 0) {
             if (prevMessage) free(prevMessage);
@@ -100,7 +102,10 @@ namespace duckscript {
             stopAll();
         } else {
             debugln("Repeating last message");
-            com::send(prevMessage, prevMessageLen);
+            duckparser::parse(prevMessage, prevMessageLen);
+
+            ESP_LOGI("", "%s", prevMessage);
+            //com::send(prevMessage, prevMessageLen);
         }
     }
 
