@@ -3,6 +3,12 @@
    Source: https://github.com/spacehuhntech/WiFiDuck
  */
 
+/*
+   This software is licensed under the MIT License. See the license file for details.
+   Source: https://github.com/wasdwasd0105/SuperWiFiDuck
+ */
+
+
 #include "USBHID.h"
 
 

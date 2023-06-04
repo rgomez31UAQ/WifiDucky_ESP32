@@ -1,6 +1,6 @@
 /*
    This software is licensed under the MIT License. See the license file for details.
-   Source: https://github.com/spacehuhntech/WiFiDuck
+   Source: https://github.com/wasdwasd0105/SuperWiFiDuck
  */
 
 #include "config.h"
