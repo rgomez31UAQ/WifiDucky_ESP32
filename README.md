@@ -8,14 +8,13 @@ This project upgrades from WiFi Duck and utilizes the native USB function of ESP
 
 ESP32 S2/3 can emulate multiple USB devices at the same time. So I want to add USB mouse and USB disk function in the future. But it depends on how much time/money I have.
 
-### 👉 Visit [wifiduck.com](https://wifiduck.com) for an improved documentation.
+Please read the install and flash parts below. They are different from the original project. 
 
 Want to learn more about BadUSBs? Check out our online course: [learnbadusb.com](https://learnbadusb.com) 
 
 ---
 
 - [WiFi Duck](#wifi-duck)
-    - [👉 Visit wifiduck.com for an improved documentation.](#-visit-wifiduckcom-for-an-improved-documentation)
   - [About](#about)
   - [Usage](#usage)
   - [Support us](#support-us)
