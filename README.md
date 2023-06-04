@@ -1,4 +1,4 @@
-# WiFi Duck
+# Super WiFi Duck
 
 <p align="center">
 <img alt="WiFi Duck Logo" src="img/thumbnail.jpg" width="640">
@@ -10,11 +10,11 @@ ESP32 S2/3 can emulate multiple USB devices at the same time. So I want to add U
 
 Please read the install and flash parts below. They are different from the original project. 
 
-Want to learn more about BadUSBs? Check out our online course: [learnbadusb.com](https://learnbadusb.com) 
+Want to learn more about BadUSBs? Check out WIFIDuck's online course: [learnbadusb.com](https://learnbadusb.com) 
 
 ---
 
-- [WiFi Duck](#wifi-duck)
+- [Super WiFi Duck](#super-wifi-duck)
   - [About](#about)
   - [Usage](#usage)
   - [Support us](#support-us)
