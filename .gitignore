@@ -42,3 +42,8 @@ save-commands.json
 *.hex
 
 *.uf2
+
+.pio
+.idea
+.vscode
+
