@@ -46,6 +46,10 @@ namespace duckparser {
 
     void press(const char* str, size_t len) {
         // character
+
+        //
+        ESP_LOGI("","%s", str);
+
         if (len == 1) keyboard.press(str);
 
         // Keys
@@ -243,11 +247,11 @@ namespace duckparser {
                 ignore_delay = true;
             }
 
-            // REPEAT (-> repeat last command n times)
-            else if (compare1(cmd->str, cmd->len, "REPEAT", CASE_SENSETIVE) || compare1(cmd->str, cmd->len, "REPLAY", CASE_SENSETIVE)) {
-                repeatNum    = toInt(line_str, line_str_len) + 1;
-                ignore_delay = true;
-            }
+//            // REPEAT (-> repeat last command n times)
+//            else if (compare1(cmd->str, cmd->len, "REPEAT", CASE_SENSETIVE) || compare1(cmd->str, cmd->len, "REPLAY", CASE_SENSETIVE)) {
+//                repeatNum    = toInt(line_str, line_str_len) + 1;
+//                ignore_delay = true;
+//            }
 
             // STRING (-> type each character)
             else if (inString || compare1(cmd->str, cmd->len, "STRING", CASE_SENSETIVE)) {

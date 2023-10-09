@@ -31,11 +31,11 @@ namespace spiffs {
         create(FILE_NAME);
         File f = open(FILE_NAME);
         if (!f) {
-            ESP_LOGI("", "test fs fail!");
+            ESP_LOGE("", "test fs fail!");
             format();
         } else {
             f.close();
-            ESP_LOGI("", "test fs done!");
+            ESP_LOGE("", "test fs done!");
             remove(FILE_NAME);
         }
     }
@@ -93,6 +93,9 @@ namespace spiffs {
     void remove(String fileName) {
         fixPath(fileName);
 
+        File f = LittleFS.open(fileName, "a+");
+        f.close();
+
         LittleFS.remove(fileName);
     }
 
@@ -104,6 +107,7 @@ namespace spiffs {
     }
 
     void write(String fileName, const char* str) {
+        ESP_LOGE("", "write!!!!!!");
         File f = open(fileName);
 
         if (f) {
@@ -116,6 +120,7 @@ namespace spiffs {
     }
 
     void write(String fileName, const uint8_t* buf, size_t len) {
+        ESP_LOGE("", "write!!!!!! utf8");
         File f = open(fileName);
 
         if (f) {

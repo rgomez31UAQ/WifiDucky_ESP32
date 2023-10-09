@@ -1,7 +1,4 @@
-/*
-   This software is licensed under the MIT License. See the license file for details.
-   Source: https://github.com/wasdwasd0105/SuperWiFiDuck
- */
+#include <Arduino.h>
 
 #include "config.h"
 #include "debug.h"
@@ -13,14 +10,12 @@
 #include "cli.h"
 #include "USB.h"
 
+
 void setup() {
     debug_init();
-
     duckparser::beginKeyboard();
     USB.begin();
-
     delay(200);
-
     spiffs::begin();
     settings::begin();
     cli::begin();
@@ -30,9 +25,6 @@ void setup() {
 }
 
 void loop() {
-
-
     webserver::update();
-
     debug_update();
 }
