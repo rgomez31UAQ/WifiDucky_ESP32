@@ -82,17 +82,7 @@ under Tools in the Arduino IDE.
 
 If you have further questions, check out the [issue section](https://github.com/spacehuhn/WiFiDuck/issues).  
 
-## Support us
 
-Hey, do you like this kind of project?  
-It took a huge amount of effort to create!  
-
-To make sure we can keep working on free and open-source projects like this,  
-**please consider becoming a [:heart: Sponsor](https://github.com/sponsors/spacehuhntech) or support us via [:coffee: Ko-fi](https://ko-fi.com/spacehuhn).**  
-
-Visit [spacehuhn.com](https://spacehuhn.com) to learn more about us. :chicken:
-
-<a href='https://ko-fi.com/G2G75FA4V' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ## Buy Hardware
 
@@ -104,58 +94,14 @@ Visit [spacehuhn.com](https://spacehuhn.com) to learn more about us. :chicken:
 ### This Project can use any esp32 s2/s3 module with native USB. No special hardware required
 
 
-## Flash Software
-
-<p align="center">
-  <a href="https://youtu.be/VQAzxBefLZo">
-    <img alt="WiFi Duck Hardware Tutorial Video Thumbnail" src="https://img.youtube.com/vi/VQAzxBefLZo/maxresdefault.jpg" width="400">
-    <br>
-    <b>Watch the video tutorial</b>
-  </a>
-</p>
-
-1. Download and install the [Arduino IDE](https://www.arduino.cc/en/main/software).
-2. Make sure you can use the ESP32 with the Arduino IDE. [Instructions can be found here.](https://github.com/espressif/arduino-esp32#installation-instructions)
-
-
-If you can't find the COM port of ESP32 board, then you're probably missing the right drivers.
-Here are links to drivers of the 2 most used UART chips on ESP32 development boards:
-- :floppy_disk: [CP2102](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
-- :floppy_disk: [CH340](https://sparks.gogo.co.nz/ch340.html)
-
-
-
 ### Flash ESP32 S2/S3
 
-1. Install required library: `SimpleCLI`
-2. Download and install zip libraries online: https://github.com/me-no-dev/ESPAsyncWebServer and https://github.com/me-no-dev/AsyncTCP
-3. Open `esp_duck/esp_duck.ino` with the Arduino IDE.
-4. Under `Tools` > `Board` in the `ESP32` section, select your board.
-For example `ESP32S2 native USB` or `ESP32-S3-USB-OTG`.
-1. Connect the ESP32 board via USB and select its port under `Tools` > `Port`.
-2. Press Upload.
+1. Install PlatformIO
+2. modify platformio.ini if needed
+3. pio run -e esp32-s3-devkitc-1 -t upload for esp32s3;
+   pio run -e esp32-s2-kaluga-1 -t upload for esp32s2
 
-**Pro Tip:** If the ESP32 is already running this software
-and you just want to update it, you don't have to connect it via USB.
-You can update it over the air! Simply connect to the `wifiduck` network (default password is `wifiduck`).  
-Then in Arduino at `Tools` > `Port` you should now see a network port.
-Select it and press `Upload`.  
-
-**Note:** After the initial flashing, the ESP32 has to format its memory, so it might take a minute until it's fully ready.  
-
-If you connected the RGB LED(not working):
-* Blue LED = Connection working
-* Green LED = Device ready
-
-### Unbrick ESP32
-
-If your module only have one USB port, you will not able to use USB serial after flashing the software. To use USB serial again, put ESP32 into bootloader mode
-
-1. Connect to the computer using USB
-2. hold reset key `RST` and boot key `0` or `BOOT`.
-3. release `RST` key but still hold the boot key
-
-Now it should flash the sketch and the correct bootloader.  
+4. see Usage part   
 
 ## Scripting
 
@@ -428,3 +374,15 @@ Software libraries used in this project:
   - [ESPAsyncTCP](https://github.com/me-no-dev/ESPAsyncTCP)
   - [ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer)
   - [SimpleCLI](https://github.com/spacehuhn/SimpleCLI)
+
+## Support original wifiduck
+
+Hey, do you like this kind of project?  
+It took a huge amount of effort to create!  
+
+To make sure we can keep working on free and open-source projects like this,  
+**please consider becoming a [:heart: Sponsor](https://github.com/sponsors/spacehuhntech) or support us via [:coffee: Ko-fi](https://ko-fi.com/spacehuhn).**  
+
+Visit [spacehuhn.com](https://spacehuhn.com) to learn more about us. :chicken:
+
+<a href='https://ko-fi.com/G2G75FA4V' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
