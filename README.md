@@ -86,8 +86,8 @@ If you have further questions, check out the [issue section](https://github.com/
 
 1. Install PlatformIO
 2. modify platformio.ini if needed
-3. pio run -e esp32-s3-devkitc-1 -t upload for esp32s3;
-   pio run -e esp32-s2-kaluga-1 -t upload for esp32s2
+3. `pio run -e esp32-s3-devkitc-1 -t upload` for esp32s3 ; 
+   `pio run -e esp32-s2-kaluga-1 -t upload` for esp32s2
 
 4. see Usage part   
 
