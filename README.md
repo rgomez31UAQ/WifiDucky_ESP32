@@ -82,19 +82,7 @@ under Tools in the Arduino IDE.
 
 If you have further questions, check out the [issue section](https://github.com/spacehuhn/WiFiDuck/issues).  
 
-
-
-## Buy Hardware
-
-### This Project can use any esp32 s2/s3 module with native USB. No special hardware required
-
-
-## DIY Hardware
-
-### This Project can use any esp32 s2/s3 module with native USB. No special hardware required
-
-
-### Flash ESP32 S2/S3
+## Flash ESP32 S2/S3
 
 1. Install PlatformIO
 2. modify platformio.ini if needed
