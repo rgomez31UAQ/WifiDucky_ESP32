@@ -214,18 +214,9 @@ The command line interface or CLI is accessible using a serial connection to the
 If a stream is open, everything you type (except messages containing exactly `close` or `read`) will be written to the file until you type `close`!  
 
 ## How to Debug
+The original debug module doesn't work right now.
+To debug, please use `ESP_LOGE` to display information via the COM port
 
-To properly debug, you need to have both the Atmega32u4
-and the ESP8266 connected via USB to your computer.  
-
-That can be tricky when you only have a all in one board, so it might be useful
-you built one yourself. You don't need to solder it, for example you can use an
-Arduino Leonardo and a NodeMCU and connect them with jumper cables.  
-
-Now open 2 instances of Arduino (so they run as separate processes!),
-select the COM port and open the serial monitor for each device.
-You might need to reset the Atmega32u4 to see serial output.
-If that causes problems with the i2c connection, try to reset the ESP8266 too.  
 ## Development
 
 ### Edit Web Files
